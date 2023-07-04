@@ -1,0 +1,14 @@
+{
+	"title"		:	"Portal 2 Map Fix",
+	"type"		:	"Map",
+	"tags"		:	[ "fun" ],
+	"ignore"	:
+	[
+		"*.psd",
+		"*.vcproj",
+		"*.svn*",
+        "*.md",
+        ".git/*",
+        ".gitattributes"
+	]
+}
