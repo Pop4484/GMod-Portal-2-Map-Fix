@@ -15,12 +15,6 @@ function ENT:KeyValue(k, v)
     if k == "OnPressed" or k == "OnUnPressed" then
         self:StoreOutput(k, v)
     end
-    if k == "Delay" then
-        self.Delay = v
-    end
-    if k == "istimer" then
-        self.istimer = v
-    end
 end
 
 function ENT:Down(activator)
