@@ -22,14 +22,14 @@ function ENT:Down(activator)
     self.Downed = true
     self:SetSequence( "up" )
     self:TriggerOutput("OnPressed",activator)
-    self:EmitSound("buttons/button_synth_positive_01.wav")
+    self:EmitSound("buttons/portal_button_down_01.wav")
 end
 
 function ENT:Up()
     if !self.Downed then return end
     self.Downed = false
     self:SetSequence( "down" )
-    self:EmitSound("buttons/button_synth_negative_02.wav")
+    self:EmitSound("buttons/portal_button_up_01.wav")
     self:TriggerOutput("OnUnPressed",self)
 end
 
