@@ -4,6 +4,12 @@ ENT.Base = "base_anim"
 
 ENT.Model = "models/props/laser_emitter.mdl"
 
+/*
+    MODELS
+    models/props/laser_emitter_center.mdl
+    models/props/laser_emitter.mdl
+*/
+
 function ENT:Initialize()
     if CLIENT then return end
     self:SetModel(self.Model)
@@ -19,9 +25,13 @@ function ENT:KeyValue(k, v)
 end
 
 function ENT:Think()
+    local strt = self:GetPos()
+    if self:GetModel() == "models/props/laser_emitter.mdl" then
+        strt = self:GetPos() - self:GetUp()*14
+    end
     local trd = {
-        start = self:GetPos(),
-        endpos = self:GetPos()+self:GetAngles():Forward()*2500,
+        start = strt,
+        endpos = strt+self:GetAngles():Forward()*2500,
         filter = self
     }
     local tr = util.TraceLine(trd)
@@ -49,7 +59,24 @@ function ENT:Think()
         ed:SetOrigin(trueEndPos)
         ed:SetAngles(trueEndAng)
         ed:SetNormal(tr.HitNormal)
-        util.Effect("StunstickImpact",ed)
+        ed:SetMagnitude(1)
+        util.Effect("ElectricSpark",ed)
     end
     self:NextThink(CurTime())
+end
+
+function ENT:Draw()
+    self:DrawModel()
+    local strt = self:GetPos()
+    if self:GetModel() == "models/props/laser_emitter.mdl" then
+        strt = self:GetPos() - self:GetUp()*14
+    end
+    local trd = {
+        start = strt,
+        endpos = strt+self:GetAngles():Forward()*2500,
+        filter = self
+    }
+    local tr = util.TraceLine(trd)
+    render.SetMaterial(Material('cable/redlaser'))
+    render.DrawBeam(strt,tr.HitPos,5,0,0,Color(255,255,255,255))
 end
