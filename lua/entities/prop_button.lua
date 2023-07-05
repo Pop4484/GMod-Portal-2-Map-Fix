@@ -2,6 +2,10 @@ AddCSLuaFile()
 ENT.Type = "anim"
 ENT.Base = "base_anim"
 
+ENT.PrintName = "Button"
+ENT.Category = "Portal 2"
+ENT.Spawnable = true
+
 ENT.Delay = 1
 ENT.istimer = false
 

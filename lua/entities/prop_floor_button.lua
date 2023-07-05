@@ -2,6 +2,10 @@ AddCSLuaFile()
 ENT.Type = "anim"
 ENT.Base = "base_anim"
 
+ENT.PrintName = "Floor Button"
+ENT.Category = "Portal 2"
+ENT.Spawnable = true
+
 ENT.Downed = false
 
 function ENT:Initialize()

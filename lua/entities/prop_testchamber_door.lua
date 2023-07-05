@@ -2,6 +2,10 @@ AddCSLuaFile()
 ENT.Type = "anim"
 ENT.Base = "base_anim"
 
+ENT.PrintName = "Testchamber Door"
+ENT.Category = "Portal 2"
+ENT.Spawnable = true
+
 function ENT:Initialize()
     if CLIENT then return end
     self:SetModel("models/props/portal_door_combined.mdl")

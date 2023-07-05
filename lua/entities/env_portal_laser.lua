@@ -2,7 +2,15 @@ AddCSLuaFile()
 ENT.Type = "anim"
 ENT.Base = "base_anim"
 
+ENT.PrintName = "Laser Emitter"
+ENT.Category = "Portal 2"
+ENT.Spawnable = true
+
 ENT.Model = "models/props/laser_emitter.mdl"
+
+if CLIENT then
+    language.Add("env_portal_laser", "Laser Beam")
+end
 
 /*
     MODELS

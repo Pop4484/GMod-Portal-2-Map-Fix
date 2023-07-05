@@ -2,7 +2,11 @@ AddCSLuaFile()
 ENT.Type = "anim"
 ENT.Base = "base_anim"
 
-ENT.Model = "models/props/laser_emitter.mdl"
+ENT.PrintName = "Laser Catcher"
+ENT.Category = "Portal 2"
+ENT.Spawnable = true
+
+ENT.Model = "models/props/laser_catcher.mdl"
 
 ENT.Shining = false 
 ENT.ShingEndTime = 0
