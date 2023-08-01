@@ -25,7 +25,7 @@ function ENT:KeyValue(k, v)
         self:StoreOutput(k, v)
     end
     if k == "Delay" then
-        self.Delay = v
+        self.Delay = tonumber(v)
     end
     if k == "istimer" then
         self.istimer = v
@@ -42,7 +42,7 @@ function ENT:Use(activator)
 end
 
 function ENT:Think()
-    if self.Timing then
+    if self.Timing and self.Delay >= 0 then
         if self.ResetTime <= CurTime() then
             self:SetSequence( "down" )
             self:EmitSound("buttons/button_synth_negative_02.wav")
