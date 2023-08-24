@@ -1,5 +1,5 @@
 AddCSLuaFile()
-ENT.Type = "anim"
+ENT.Type = "ai"
 ENT.Base = "base_anim"
 
 ENT.PrintName = "Personality Core"
@@ -30,10 +30,11 @@ function ENT:Initialize()
 		self:SetModel("models/npcs/personality_sphere/personality_sphere_skins.mdl")
 	end
 	self:ResetSequence("sphere_idle_neutral")
-    self:PhysicsInit(SOLID_VPHYSICS)
-    self:SetMoveType(MOVETYPE_VPHYSICS)
-    self:PhysWake()
+	self:PhysicsInit(SOLID_VPHYSICS)
+	self:SetMoveType(MOVETYPE_VPHYSICS)
+	self:PhysWake()
 	self:SetUseType(SIMPLE_USE)
+	self:CapabilitiesAdd(CAP_ANIMATEDFACE)
 end
 
 function ENT:Use( activator, useType )
