@@ -286,3 +286,20 @@ function DisplayChapterTitle()
         end
     end
 end
+
+
+// does this or the changelevel even work
+function TransitionFromMap()
+    local next_map = ""
+    for i,v in pairs(MapPlayOrder) do
+        if v == game.GetMap() then
+            local skipIndex = i+1
+            if string.find(MapPlayOrder[skipIndex],"@") then
+                skipIndex = skipIndex+1
+            end
+            next_map = MapPlayOrder[skipIndex]
+            break
+        end
+    end
+    EntFire( "@changelevel", "ChangeLevel", next_map, 0.0 )	
+end

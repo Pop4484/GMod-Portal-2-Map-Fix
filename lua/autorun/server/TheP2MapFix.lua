@@ -1,4 +1,5 @@
-return // moved to lua/portal2/vscript/sp_transition_list.lua
+if true then return end // moved to lua/portal2/vscript/sp_transition_list.lua
+
 // The code here is HEAVILY referenced from the Portal 2 VScript "sp_transition_list.nut"
 
 // This is the order to play the maps
