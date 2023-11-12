@@ -201,7 +201,7 @@ function OnPostTransition()
     for ind,map in pairs(MapPlayOrder) do
         if game.GetMap() == MapPlayOrder[ind] then
             foundMap = true
-            ply:PrintMessage(HUD_PRINTCONSOLE,"Hey! "..MapPlayOrder[ind].." is a Portal 2 map!!! THIS WORKS!!!")
+            //ply:PrintMessage(HUD_PRINTCONSOLE,"Hey! "..MapPlayOrder[ind].." is a Portal 2 map!!! THIS WORKS!!!")
             IsPortal2Map = true
             // hook up our entry elevator
             if ind - 1 >= 0 then
@@ -216,7 +216,7 @@ function OnPostTransition()
                         arrival_elevator_elevator_1[1]:Fire("startforward")
                     end
                 else
-                    ply:PrintMessage(HUD_PRINTCENTER,"Oopsies! @arrival_teleport was not found!")
+                    //ply:PrintMessage(HUD_PRINTCENTER,"Oopsies! @arrival_teleport was not found!")
                 end
             end
 
