@@ -8,6 +8,8 @@ ENT.Spawnable = true
 
 ENT.AutomaticFrameAdvance = true
 
+ENT.altmodel = 0
+
 if CLIENT then
     language.Add("npc_personality_core", "Personality Core")
 end
@@ -17,16 +19,16 @@ function ENT:KeyValue( key, value )
 		self:SetSkin(tonumber(value))
 	end
 	if key == "altmodel" then
-		altmodel = value
+		self.altmodel = value
 	end
 end
 	
 function ENT:Initialize()
     if CLIENT then return end
 	self:SetModel("models/npcs/personality_sphere/personality_sphere.mdl")
-	if altmodel == "0" then
+	if self.altmodel == "0" then
 		self:SetModel("models/npcs/personality_sphere/personality_sphere.mdl")
-	elseif altmodel == "1" then
+	elseif self.altmodel == "1" then
 		self:SetModel("models/npcs/personality_sphere/personality_sphere_skins.mdl")
 	end
 	self:ResetSequence("sphere_idle_neutral")
@@ -61,4 +63,9 @@ end
 function ENT:Think()
 	self:NextThink( CurTime() )
 	return true
+end
+
+function ENT:PhysicsCollide(colData,collider)
+    if colData.Speed < 150 then return end
+    self:EmitSound("P2SolidMetal.ImpactHard",65,100,colData.Speed/1000)
 end

@@ -34,7 +34,7 @@ end
 
 function ENT:Use(activator)
     if self.Timing then return end
-    self:SetSequence( "up" )
+    self:ResetSequence( "down" )
     self:TriggerOutput("OnPressed",activator)
     self:EmitSound("buttons/button_synth_positive_01.wav")
     self.Timing = true
@@ -44,10 +44,16 @@ end
 function ENT:Think()
     if self.Timing and self.Delay >= 0 then
         if self.ResetTime <= CurTime() then
-            self:SetSequence( "down" )
+            self:ResetSequence( "up" )
             self:EmitSound("buttons/button_synth_negative_02.wav")
             self:TriggerOutput("OnButtonReset",self)
             self.Timing = false
         end 
     end
+end
+
+ENT.AutomaticFrameAdvance = true
+function ENT:Think()
+    self:NextThink(CurTime())
+    return true
 end

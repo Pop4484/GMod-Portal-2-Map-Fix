@@ -18,3 +18,8 @@ function ENT:Initialize()
     self:SetMoveType(MOVETYPE_VPHYSICS)
     self:PhysWake()
 end
+
+function ENT:PhysicsCollide(colData,collider)
+    if colData.Speed < 150 then return end
+    self:EmitSound("P2SolidMetal.ImpactHard",65,100,colData.Speed/1000)
+end

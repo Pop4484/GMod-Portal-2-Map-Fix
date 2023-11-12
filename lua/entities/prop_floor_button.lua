@@ -24,7 +24,7 @@ end
 function ENT:Down(activator)
     if self.Downed then return end
     self.Downed = true
-    self:SetSequence( "up" )
+    self:ResetSequence( "down" )
     self:TriggerOutput("OnPressed",activator)
     self:EmitSound("buttons/portal_button_down_01.wav")
 end
@@ -32,7 +32,7 @@ end
 function ENT:Up()
     if !self.Downed then return end
     self.Downed = false
-    self:SetSequence( "down" )
+    self:ResetSequence( "up" )
     self:EmitSound("buttons/portal_button_up_01.wav")
     self:TriggerOutput("OnUnPressed",self)
 end
@@ -58,4 +58,10 @@ function ENT:Draw()
     self:DrawModel()
     if !GetConVar("developer"):GetBool() then return end
     render.DrawWireframeBox( self:GetPos(), Angle( 0, 0, 0 ), Vector(-20,-20,-0), Vector(20,20,10), Color(255,255,255,255), false )
+end
+
+ENT.AutomaticFrameAdvance = true
+function ENT:Think()
+    self:NextThink(CurTime())
+    return true
 end

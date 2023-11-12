@@ -1,3 +1,4 @@
+return // moved to lua/portal2/vscript/sp_transition_list.lua
 // The code here is HEAVILY referenced from the Portal 2 VScript "sp_transition_list.nut"
 
 // This is the order to play the maps
@@ -195,13 +196,14 @@ local MapPlayOrder = {
 "demo_paint",
 }
 
-hook.Add("PlayerSpawn","Portal2MapFix",function(ply,trans)
+hook.Add("PlayerSpawn","Portal 2 Map Fix - idk i forgot the script lol",function(ply,trans)
     local foundMap = false
 
     for ind,map in pairs(MapPlayOrder) do
         if game.GetMap() == MapPlayOrder[ind] then
             foundMap = true
             ply:PrintMessage(HUD_PRINTCONSOLE,"Hey! "..MapPlayOrder[ind].." is a Portal 2 map!!! THIS WORKS!!!")
+            IsPortal2Map = true
             // hook up our entry elevator
             if ind - 1 >= 0 then
                 /*
@@ -224,4 +226,64 @@ hook.Add("PlayerSpawn","Portal2MapFix",function(ply,trans)
     end
 
 
+end)
+
+
+
+///////////////////////////
+// sp_transition_list.nut//
+///////////////////////////
+
+local CHAPTER_TITLES = {
+	{ map = "sp_a1_intro1", title_text = "#portal2_Chapter1_Title", subtitle_text = "#portal2_Chapter1_Subtitle", displayOnSpawn = false,		displaydelay = 1.0 },
+	{ map = "sp_a2_laser_intro", title_text = "#portal2_Chapter2_Title", subtitle_text = "#portal2_Chapter2_Subtitle", displayOnSpawn = true,	displaydelay = 2.5 },
+	{ map = "sp_a2_sphere_peek", title_text = "#portal2_Chapter3_Title", subtitle_text = "#portal2_Chapter3_Subtitle", displayOnSpawn = true,	displaydelay = 2.5 },
+	{ map = "sp_a2_column_blocker", title_text = "#portal2_Chapter4_Title", subtitle_text = "#portal2_Chapter4_Subtitle", displayOnSpawn = true, displaydelay = 2.5 },
+	{ map = "sp_a2_bts3", title_text = "#portal2_Chapter5_Title", subtitle_text = "#portal2_Chapter5_Subtitle", displayOnSpawn = true,			displaydelay = 1.0 },
+	{ map = "sp_a3_00", title_text = "#portal2_Chapter6_Title", subtitle_text = "#portal2_Chapter6_Subtitle", displayOnSpawn = true,			displaydelay = 1.5 },
+	{ map = "sp_a3_speed_ramp", title_text = "#portal2_Chapter7_Title", subtitle_text = "#portal2_Chapter7_Subtitle", displayOnSpawn = true,	displaydelay = 1.0 },
+	{ map = "sp_a4_intro", title_text = "#portal2_Chapter8_Title", subtitle_text = "#portal2_Chapter8_Subtitle", displayOnSpawn = true,			displaydelay = 2.5 },
+	{ map = "sp_a4_finale1", title_text = "#portal2_Chapter9_Title", subtitle_text = "#portal2_Chapter9_Subtitle", displayOnSpawn = false,		displaydelay = 1.0 },
+}
+
+// Display the chapter title (portal 2 vscript code lol)
+/*function DisplayChapterTitle()
+{
+	foreach (index, level in CHAPTER_TITLES)
+	{
+		if (level.map == GetMapName() )
+		{
+			EntFire( "@chapter_title_text", "SetTextColor", "210 210 210 128", 0.0 )
+			EntFire( "@chapter_title_text", "SetTextColor2", "50 90 116 128", 0.0 )
+			EntFire( "@chapter_title_text", "SetPosY", "0.32", 0.0 )
+			EntFire( "@chapter_title_text", "SetText", level.title_text, 0.0 )
+			EntFire( "@chapter_title_text", "display", "", level.displaydelay )
+			
+			EntFire( "@chapter_subtitle_text", "SetTextColor", "210 210 210 128", 0.0 )
+			EntFire( "@chapter_subtitle_text", "SetTextColor2", "50 90 116 128", 0.0 )
+			EntFire( "@chapter_subtitle_text", "SetPosY", "0.35", 0.0 )
+			EntFire( "@chapter_subtitle_text", "settext", level.subtitle_text, 0.0 )
+			EntFire( "@chapter_subtitle_text", "display", "", level.displaydelay )
+		}
+	}
+}*/
+
+hook.Add("InitPostEntity","Portal 2 Map Fix - Display Chapter Title",function()
+    for index,level in pairs(CHAPTER_TITLES) do
+        if level.map == game.GetMap() then
+            local chapter_title_text = ents.FindByName("@chapter_title_text")[0]
+            chapter_title_text:Fire("SetTextColor", "210 210 210 128")
+            chapter_title_text:Fire("SetTextColor2", "50 90 116 128")
+            chapter_title_text:Fire("SetPosY", "0.32")
+            chapter_title_text:Fire("SetText", level.TitleText)
+            chapter_title_text:Fire("Display", "" ,level.displaydelay)
+
+            local chapter_subtitle_text = ents.FindByName("@chapter_subtitle_text")[0]
+            chapter_title_text:Fire("SetTextColor", "210 210 210 128")
+            chapter_title_text:Fire("SetTextColor2", "50 90 116 128")
+            chapter_title_text:Fire("SetPosY", "0.35")
+            chapter_title_text:Fire("SetText", level.subtitle_text)
+            chapter_title_text:Fire("Display", "" ,level.displaydelay)
+        end
+    end
 end)
