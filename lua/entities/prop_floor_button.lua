@@ -6,6 +6,8 @@ ENT.PrintName = "Floor Button"
 ENT.Category = "Portal 2"
 ENT.Spawnable = true
 
+ENT.AutomaticFrameAdvance = true
+
 ENT.Downed = false
 
 function ENT:Initialize()
@@ -38,7 +40,8 @@ function ENT:Up()
 end
 
 function ENT:Think()
-    if CLIENT then return end
+    elf:NextThink(CurTime())
+    if CLIENT then return true end
     local yee = {
         start = self:GetPos(),
         endpos = self:GetPos(),
@@ -52,16 +55,11 @@ function ENT:Think()
     else
         self:Up(tr.Entity)
     end
+    return true
 end
 
 function ENT:Draw()
     self:DrawModel()
     if !GetConVar("developer"):GetBool() then return end
     render.DrawWireframeBox( self:GetPos(), Angle( 0, 0, 0 ), Vector(-20,-20,-0), Vector(20,20,10), Color(255,255,255,255), false )
-end
-
-ENT.AutomaticFrameAdvance = true
-function ENT:Think()
-    self:NextThink(CurTime())
-    return true
 end
