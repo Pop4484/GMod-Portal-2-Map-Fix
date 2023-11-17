@@ -6,6 +6,8 @@ ENT.PrintName = "Button"
 ENT.Category = "Portal 2"
 ENT.Spawnable = true
 
+ENT.AutomaticFrameAdvance = true
+
 ENT.Delay = 1
 ENT.istimer = false
 
@@ -50,10 +52,6 @@ function ENT:Think()
             self.Timing = false
         end 
     end
-end
-
-ENT.AutomaticFrameAdvance = true
-function ENT:Think()
     self:NextThink(CurTime())
     return true
 end
