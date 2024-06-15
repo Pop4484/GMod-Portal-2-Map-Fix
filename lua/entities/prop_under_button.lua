@@ -2,7 +2,7 @@ AddCSLuaFile()
 ENT.Type = "anim"
 ENT.Base = "base_anim"
 
-ENT.PrintName = "Underground_Button"
+ENT.PrintName = "Underground Button"
 ENT.Category = "Portal 2"
 ENT.Spawnable = true
 
