@@ -6,8 +6,6 @@ ENT.PrintName = "Button"
 ENT.Category = "Portal 2"
 ENT.Spawnable = true
 
-ENT.AutomaticFrameAdvance = true
-
 ENT.Delay = 1
 ENT.istimer = false
 
@@ -44,14 +42,19 @@ function ENT:Use(activator)
 end
 
 function ENT:Think()
+    self:OnCustomThink()
     if self.Timing and self.Delay >= 0 then
-        if self.ResetTime <= CurTime() then
+        if CurTime() > self.ResetTime then
             self:ResetSequence( "up" )
             self:EmitSound("buttons/button_synth_negative_02.wav")
             self:TriggerOutput("OnButtonReset",self)
             self.Timing = false
         end 
     end
+end
+
+ENT.AutomaticFrameAdvance = true
+function ENT:OnCustomThink()
     self:NextThink(CurTime())
     return true
 end

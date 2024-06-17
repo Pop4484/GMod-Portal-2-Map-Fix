@@ -1,5 +1,5 @@
 AddCSLuaFile()
-ENT.Type = "anim"
+ENT.Type = "ai"
 ENT.Base = "base_anim"
 
 ENT.PrintName = "Weighted Storage Cube"
@@ -30,6 +30,7 @@ function ENT:Initialize()
     self:PhysicsInit(SOLID_VPHYSICS)
     self:SetMoveType(MOVETYPE_VPHYSICS)
     self:PhysWake()
+    self:GetPhysicsObject():SetMass(120)
 end
 
 function ENT:PhysicsCollide(colData,collider)
