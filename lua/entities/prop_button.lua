@@ -41,8 +41,14 @@ function ENT:Use(activator)
     self.ResetTime = CurTime() + self.Delay
 end
 
+ENT.AutomaticFrameAdvance = true
 function ENT:Think()
     self:OnCustomThink()
+    self:NextThink(CurTime())
+    return true
+end
+
+function ENT:OnCustomThink()
     if self.Timing and self.Delay >= 0 then
         if CurTime() > self.ResetTime then
             self:ResetSequence( "up" )
@@ -51,10 +57,4 @@ function ENT:Think()
             self.Timing = false
         end 
     end
-end
-
-ENT.AutomaticFrameAdvance = true
-function ENT:OnCustomThink()
-    self:NextThink(CurTime())
-    return true
 end

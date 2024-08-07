@@ -1,5 +1,5 @@
 AddCSLuaFile()
-ENT.Type = "ai"
+ENT.Type = "anim"
 ENT.Base = "base_anim"
 
 ENT.PrintName = "Weighted Storage Cube"

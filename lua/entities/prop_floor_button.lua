@@ -8,10 +8,12 @@ ENT.Spawnable = true
 ENT.Downed = false
 
 function ENT:Initialize()
-    if CLIENT then return end
+    self:SetMoveType(MOVETYPE_NONE)
     self:SetModel("models/props/portal_button.mdl")
-    self:PhysicsInitBox(Vector(-self:GetModelBounds().X, -self:GetModelBounds().Y, -6), Vector(self:GetModelBounds().X, self:GetModelBounds().Y, 13))
+    //self:PhysicsInitBox(Vector(-self:GetModelBounds().X, -self:GetModelBounds().Y, -6), Vector(self:GetModelBounds().X, self:GetModelBounds().Y, 13))
     --self:PhysicsInit(SOLID_VPHYSICS)
+    self:SetCollisionBounds(Vector(-self:GetModelBounds().X, -self:GetModelBounds().Y, -6), Vector(self:GetModelBounds().X, self:GetModelBounds().Y, 6))
+    self:SetSolid(SOLID_BBOX)
     self:SetMoveType(MOVETYPE_NONE)
     --self:SetPos(self:GetPos()-Vector(0, 0, 10))
 end
@@ -25,7 +27,7 @@ end
 function ENT:Down(activator)
     if self.Downed then return end
     self.Downed = true
-    self:PhysicsInitBox(Vector(-self:GetModelBounds().X, -self:GetModelBounds().Y, -6), Vector(self:GetModelBounds().X, self:GetModelBounds().Y, 6))
+    //self:PhysicsInitBox(Vector(-self:GetModelBounds().X, -self:GetModelBounds().Y, -6), Vector(self:GetModelBounds().X, self:GetModelBounds().Y, 6))
     self:SetMoveType(MOVETYPE_NONE)
     self:ResetSequence( "down" )
     self:TriggerOutput("OnPressed",activator)
@@ -35,7 +37,7 @@ end
 function ENT:Up()
     if !self.Downed then return end
     self.Downed = false
-    self:PhysicsInitBox(Vector(-self:GetModelBounds().X, -self:GetModelBounds().Y, -6), Vector(self:GetModelBounds().X, self:GetModelBounds().Y, 13))
+    //self:PhysicsInitBox(Vector(-self:GetModelBounds().X, -self:GetModelBounds().Y, -6), Vector(self:GetModelBounds().X, self:GetModelBounds().Y, 13))
     self:SetMoveType(MOVETYPE_NONE)
     self:ResetSequence( "up" )
     self:EmitSound("buttons/portal_button_up_01.wav")
@@ -62,6 +64,8 @@ function ENT:Think()
     else
         self:Up(tr.Entity)
     end
+    self:NextThink(CurTime())
+    return true
 end
 
 function ENT:Draw()
